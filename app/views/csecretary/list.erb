@@ -1,0 +1,11 @@
+<h2>자유게시판</h2>
+
+<% @allpost.each do |x| %>
+<h3><a href="/csecretary/read/<%= x.id %>"><%= x.post_title %></a></h3>
+
+
+
+<% end %>
+
+
+<h3><a href="/csecretary/create">글쓰기</a></h3>

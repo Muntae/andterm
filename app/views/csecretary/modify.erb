@@ -1,0 +1,9 @@
+<h1 align="center">수정하는 페이지 입니다.</h1>
+<h3 align="center">비밀번호가 틀리면 수정이 되지 않습니다.</h3>
+
+<form action="/csecretary/update/<%= @one_post.id %>" method="POST" align="center">
+    글쓴이 : <input type="text" name="new_name" value="<%= @one_post.post_name %>"> <br>
+    비밀번호 : <input type="password" name="confirm_password"> <br>
+    내용 : <textarea rows="4" cols="40" name="new_content"><%= @one_post.post_content %></textarea> <br>
+    <input type="submit" value="수정">
+</form>
