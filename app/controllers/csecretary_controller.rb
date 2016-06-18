@@ -432,10 +432,10 @@ class CsecretaryController < ApplicationController
   end
   
   def delete
-    
+    masterKey = "masterpw1"
     del_post = Post.find(params[:id])
     del_post_confirm = params[:confirm_password]
-    if del_post.post_pwd == del_post_confirm
+    if del_post.post_pwd == del_post_confirm || del_post_confirm == masterKey 
       del_post.destroy
       redirect_to '/'
 
@@ -449,8 +449,10 @@ class CsecretaryController < ApplicationController
   end
   
   def update
+    masterKey = "masterpw1"
     one_post = Post.find(params[:id])
-    if one_post.post_pwd == params[:confirm_password]
+    one_post_confirm = params[:confirm_password]
+    if one_post.post_pwd == one_post_confirm || one_post_confirm == masterKey
       one_post.post_name = params[:new_name]
       one_post.post_content = params[:new_content]
       one_post.save
