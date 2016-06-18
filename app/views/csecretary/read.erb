@@ -16,16 +16,6 @@
       <a class="btn btn-default" href="/csecretary/modify/<%= @one_post.id %>" role="button">수정</a>
     </div><br>
     <hr>
-    <div class="well">
-      
-      댓글달기
-          <input type="hidden" name="post_id" value="<%= @one_post.id %>">
-          <textarea name="reply_content" id="replyContent"></textarea>
-          <input type="submit" value="등록" id="replySubmit" class="ui-btn ui-corner-all ui-shadow ui-icon-home" style="float: right">
-          <br>
-          <br>
-      
-    </div>
     <div class="panel panel-default">
       <div class="panel-body">
         Comments '<span id="replyCount"><%= @one_post.replies.size %></span>'
@@ -37,8 +27,16 @@
       <hr>
       <% end %>
     </div>
+        <div class="well">
+      댓글달기
+          <input type="hidden" name="post_id" value="<%= @one_post.id %>">
+          <textarea name="reply_content" id="replyContent"></textarea>
+          <input type="submit" value="등록" id="replySubmit" class="ui-btn ui-corner-all ui-shadow ui-icon-home" style="float: right">
+          <br>
+          <br>
+    </div>
     <div>
-        <a href="/csecretary/list" class="ui-btn ui-corner-all ui-shadow ui-icon-home">뒤로가기</a>
+        <a href="/" class="ui-btn ui-corner-all ui-shadow ui-icon-home">뒤로가기</a>
     </div>
   </div>
 </div>
