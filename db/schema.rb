@@ -55,9 +55,10 @@ ActiveRecord::Schema.define(version: 20160616101652) do
 
   create_table "replies", force: :cascade do |t|
     t.integer  "post_id"
-    t.string   "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "reply_content"
+    t.string   "reply_name"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
 end

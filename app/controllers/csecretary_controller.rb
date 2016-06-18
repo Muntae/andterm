@@ -416,19 +416,15 @@ class CsecretaryController < ApplicationController
   end
   
   def write
+    newpost = Post.new
+    newpost.post_title = params[:title]
+    newpost.post_name = params[:name]
+    newpost.post_pwd = params[:password]
+    newpost.post_content = params[:content]
+    newpost.save
     
-    post = Post.new
-    post.post_title = params[:title]
-    post.post_name = params[:name]
-    post.post_pwd = params[:password]
-    post.post_content = params[:content]
-    
-    if post.save
-      redirect_to '/csecretary/read/' + post.id.to_s
-    else
-      
-    end
-    
+    redirect_to '/csecretary/read/' + newpost.id.to_s
+  
   end
   
   def delete

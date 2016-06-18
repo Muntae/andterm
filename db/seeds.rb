@@ -58,8 +58,9 @@ Pastver.create(name:'nwlab_data_noti', ftitle:"empty", ltitle:"empty", length:"0
 Pastver.create(name:'nwlab_data_lect', ftitle:"empty", ltitle:"empty", length:"0", month:"00", day:"00", hour:"00", min:"00")
 Pastver.create(name:'mobile_data_noti', ftitle:"empty", ltitle:"empty", length:"0", month:"00", day:"00", hour:"00", min:"00")
 Pastver.create(name:'mobile_data_lect', ftitle:"empty", ltitle:"empty", length:"0", month:"00", day:"00", hour:"00", min:"00")
+Pastver.create(name:'har_c', ftitle:"empty", ltitle:"empty", length:"0", month:"00", day:"00", hour:"00", min:"00")
 
-
+Curver.create(name:'har_c', ftitle:"empty", ltitle:"empty", length:"0", month:"00", day:"00", hour:"00", min:"00")
 Curver.create(name:'mobile_data_noti', ftitle:"empty", ltitle:"empty", length:"0", month:"00", day:"00", hour:"00", min:"00")
 Curver.create(name:'mobile_data_lect', ftitle:"empty", ltitle:"empty", length:"0", month:"00", day:"00", hour:"00", min:"00")
 Curver.create(name:'nwlab_data_noti', ftitle:"empty", ltitle:"empty", length:"0", month:"00", day:"00", hour:"00", min:"00")
