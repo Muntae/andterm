@@ -1,9 +1,40 @@
-<h1 align="center">수정하는 페이지 입니다.</h1>
-<h3 align="center">비밀번호가 틀리면 수정이 되지 않습니다.</h3>
-
-<form action="/csecretary/update/<%= @one_post.id %>" method="POST" align="center">
-    글쓴이 : <input type="text" name="new_name" value="<%= @one_post.post_name %>"> <br>
-    비밀번호 : <input type="password" name="confirm_password"> <br>
-    내용 : <textarea rows="4" cols="40" name="new_content"><%= @one_post.post_content %></textarea> <br>
-    <input type="submit" value="수정">
-</form>
+<div class="container">
+  <div data-role="header" style="margin-bottom: 15px; padding: 5px;">
+    <a href="/csecretary/list" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">홈</a>
+    <h1>자유게시판</h1>
+  </div>
+  <form class="form-horizontal" action="/csecretary/write" enctype="multipart/form-data" method="POST">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-2 control-label">제목</label>
+      <div class="col-sm-10">
+        <input type="text" name="title" class="form-control" id="inputTitle" value="<%= @one_post.post_title %>">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-2 control-label">글쓴이</label>
+      <div class="col-sm-10">
+        <input type="text" name="name" class="form-control" value="<%= @one_post.post_name %>">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">내용</label>
+      <div class="col-sm-10">
+        <textarea name="content"><%= @one_post.post_content %></textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">비밀번호</label>
+      <div class="col-sm-10">
+        <input type="password" name="password" class="form-control"placeholder="게시물을 수정, 삭제할 때 필요합니다.">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-6">
+        <button class="ui-btn ui-corner-all ui-shadow ui-icon-home" type="submit">수정하기</button>
+      </div>
+      <div class="col-xs-6">
+        <a href="/csecretary/read/<%= @one_post.id %>" class="ui-btn ui-corner-all ui-shadow ui-icon-home">취소하기</a>
+      </div>
+    </div>
+  </form>
+</div>

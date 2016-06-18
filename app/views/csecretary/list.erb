@@ -1,11 +1,19 @@
-<h2>자유게시판</h2>
+<div class="container">
+  <div data-role="header" style="margin-bottom: 15px; padding: 5px;">
+    <h1>자유게시판</h1>
+  </div>
+  <div data-role="main" class="ui-content">
+    <ul data-role="listview" data-inset="true">
+        <% @allpost.each do |x| %>
+  		<li><a href="/csecretary/read/<%= x.id %>"><%= x.post_title %></a></li>
+  		  <% end %>
+  	</ul>
+  </div>
+  <div>
+    <a href="/csecretary/create" class="ui-btn ui-corner-all ui-shadow ui-icon-home">글쓰기</a>
+  </div>
+</div>
 
-<% @allpost.each do |x| %>
-<h3><a href="/csecretary/read/<%= x.id %>"><%= x.post_title %></a></h3>
 
 
 
-<% end %>
-
-
-<h3><a href="/csecretary/create">글쓰기</a></h3>

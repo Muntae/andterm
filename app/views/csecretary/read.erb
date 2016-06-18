@@ -1,24 +1,62 @@
-<h2>게시글 보는 페이지</h2>
-
-<div align="center">
-
-    <div>
-    
-    <h3><%= @one_post.post_title %> | <%= @one_post.post_name %></h3>
-    <h3><%= @one_post.post_content %></h3>
-    <a href="/csecretary/delete/<%= @one_post.id %>"> [삭제]</a>
-    <a href="/csecretary/modify/<%= @one_post.id %>"> [수정]</a> 
-    <br>
-    <% @one_post.replies.each do |r| %>
-        ㄴ<%= r.content %><br>
-    <% end %>
-    <form action="/csecretary/write_reply" type="POST">
-    댓글
-        <input type="hidden" name="post_id" value="<%= @one_post.id %>">
-        <input type="text" name="myreply">
-        <input type="submit" value="등록"> <br>
-    </form>
-    <a style="text-align:center" href="/">뒤로가기</a>
+<div class="container">
+  <div data-role="header" style="margin-bottom: 15px; padding: 5px;">
+    <a href="/csecretary/list" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">홈</a>
+    <h1>자유게시판</h1>
+  </div>
+  <div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        제목 : <%= @one_post.post_title %><div style="float: right">글쓴이 : <%= @one_post.post_name %></div>
+        <hr>
+        <%= @one_post.post_content %>
+      </div>
     </div>
+    <div style="float: right">
+      <a class="btn btn-default" href="/csecretary/delete/<%= @one_post.id %>" role="button">삭제</a>
+      <a class="btn btn-default" href="/csecretary/modify/<%= @one_post.id %>" role="button">수정</a>
+    </div><br>
+    <hr>
+    <div class="well">
+      <form action="/csecretary/write_reply" method="POST">
+      댓글달기
+          <input type="hidden" name="post_id" value="<%= @one_post.id %>">
+          <textarea name="reply_content" id="replyContent"></textarea>
+          <input type="submit" value="등록" id="replySubmit" class="ui-btn ui-corner-all ui-shadow ui-icon-home" style="float: right">
+          <br>
+          <br>
+      </form>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        Comments '<%= @one_post.replies.size %>'
+      </div>
+    </div>
+    <% @one_post.replies.each do |r| %>
+    <h5 style="margin-left: 20px;"><%= r.reply_content %></h5>
+    <hr>
+    <% end %>
+    
+    <div>
+        <a href="/csecretary/list" class="ui-btn ui-corner-all ui-shadow ui-icon-home">뒤로가기</a>
+    </div>
+  </div>
 </div>
 
+
+<script>
+  $(function() {
+    $("#replySubmit").click(
+      function(){
+        $.ajax({
+          data: {
+            post_id: $(<%= @one_post.id %>).val(),
+            reply_content: $("#replyContent").val()},
+            url: "/csecretary/write_reply",
+            success: function(data) {
+              var reply_txt = $("#replyContent").val();
+              $(".panel-body").append(reply_txt);
+            }
+          });
+      });
+  });
+</script>
