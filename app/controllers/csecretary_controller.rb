@@ -468,4 +468,8 @@ class CsecretaryController < ApplicationController
     
     redirect_to '/csecretary/read/' + my_reply.post_id.to_s
   end
+  
+  def relay
+    redirect_to '/'
+  end
 end
