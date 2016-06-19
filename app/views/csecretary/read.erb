@@ -1,94 +1,91 @@
-  <div data-role="header">
-    
-      <a href="/csecretary/relay" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left" style="margin: 3px;">홈</a>
-    
-    <p style="font-size: 20px; text-align: center; margin-top: 10px"><strong>커뮤니티 게시판</strong><p>
+<div data-role="header">
+  <a href="/csecretary/relay" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left" style="margin: 3px;">홈</a>
+  <p style="font-size: 20px; text-align: center; margin-top: 10px"><strong>커뮤니티 게시판</strong><p>
+</div>
+
+<div style="margin-left: 6px; margin-right: 6px; margin-top:5px">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      제목 : <%= @one_post.post_title %><div style="float: right">글쓴이 : <%= @one_post.post_name %></div>
+      <hr>
+      <%= @one_post.post_content %>
+    </div>
   </div>
-  
-  <div style="margin-left: 6px; margin-right: 6px; margin-top:5px">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        제목 : <%= @one_post.post_title %><div style="float: right">글쓴이 : <%= @one_post.post_name %></div>
-        <hr>
-        <%= @one_post.post_content %>
-      </div>
+  <div style="float: right">
+    <a class="btn btn-default" href="/csecretary/delete/<%= @one_post.id %>" role="button" style="color: black">삭제</a>
+    <a class="btn btn-default" href="/csecretary/modify/<%= @one_post.id %>" role="button" style="color: black">수정</a>
+  </div><br>
+  <hr>
+  <div class="well">
+    댓글달기
+    <input type="hidden" name="post_id" value="<%= @one_post.id %>">
+    <textarea name="reply_content" id="replyContent"></textarea>
+    <div class="col-xs-8"></div>
+    <div class="col-xs-4">
+      <input type="submit" value="등록" id="replySubmit" class="btn btn-default" style="float: right">
     </div>
-    <div style="float: right">
-      <a class="btn btn-default" href="/csecretary/delete/<%= @one_post.id %>" role="button" style="color: black">삭제</a>
-      <a class="btn btn-default" href="/csecretary/modify/<%= @one_post.id %>" role="button" style="color: black">수정</a>
-    </div><br>
-    <hr>
-    <div class="well">
-      댓글달기
-          <input type="hidden" name="post_id" value="<%= @one_post.id %>">
-          <textarea name="reply_content" id="replyContent"></textarea>
-          <div class="col-xs-8"></div>
-          <div class="col-xs-4">
-            <input type="submit" value="등록" id="replySubmit" class="btn btn-default" style="float: right">
-          </div>
-          <br>
-          <br>
-      
+    <br>
+    <br>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      Comments '<span id="replyCount"><%= @one_post.replies.size %></span>'
     </div>
-    <div class="panel panel-default">
-      <div class="panel-body">
-        Comments '<span id="replyCount"><%= @one_post.replies.size %></span>'
-      </div>
-    </div>
-    <div class="replies_content">
-      <% @one_post.replies.each do |r| %>
+  </div>
+  <div class="replies_content">
+    <% @one_post.replies.each do |r| %>
       <h5 style="margin-left: 20px;"><%= r.reply_content %><span> - <%= r.created_at.strftime("%Y-%m-%d-%H-%M-%S") %></span></h5>
       <hr>
-      <% end %>
-    </div>
-    <div>
-        <a href="/csecretary/relay" class="ui-btn ui-corner-all ui-shadow ui-icon-home">뒤로가기</a>
-    </div>
+    <% end %>
   </div>
+  <div>
+      <a href="/csecretary/relay" class="ui-btn ui-corner-all ui-shadow ui-icon-home">뒤로가기</a>
+  </div>
+</div>
 
 <script>
-  $(function(){
-    $("#replySubmit").click(function(){
-        $.ajax({
-          method: "POST",
-          url: "/csecretary/write_reply",
-          data: { post_id: <%= @one_post.id %>, reply_content: $("#replyContent").val()
-          },
-            success: function(){
-              var reply_txt = $("#replyContent").val();
-              var replycount = parseInt($( "#replyCount" ).text());
-              var dt = new Date();
-              var tempmonth = (dt.getMonth()+1);
-              var tempdate = dt.getDate();
-              var temphour = dt.getHours();
-              var tempmin = dt.getMinutes();
-              var tempsec = dt.getSeconds();
-              if (tempmonth < 10) {
-                tempmonth = "0" + tempmonth;
-              }
-              
-              if (tempdate < 10) {
-                tempdate = "0" + tempdate;
-              }
-              
-              if (temphour < 10) {
-                temphour = "0" + temphour;
-              }
-              
-              if (tempmin < 10) {
-                tempmin = "0" + tempmin;
-              }
-              
-              if (tempsec < 10) {
-                tempsec = "0" + tempsec;
-              }
-              
-              var time = dt.getFullYear() + "-" + tempmonth + "-" + tempdate + "-" + temphour + "-" + tempmin + "-" + tempsec;
-              $( ".replies_content" ).append( "<h5 style=\"margin-left: 20px;\">" + reply_txt + "<span> - " + time + "</span>" + "</h5>" + "<hr>" );
-              $( "#replyCount" ).text(replycount + 1);
-              $( "#replyContent" ).val('');
+$(function(){
+  $("#replySubmit").click(function(){
+      $.ajax({
+        method: "POST",
+        url: "/csecretary/write_reply",
+        data: { post_id: <%= @one_post.id %>, reply_content: $("#replyContent").val()
+        },
+          success: function(){
+            var reply_txt = $("#replyContent").val();
+            var replycount = parseInt($( "#replyCount" ).text());
+            var dt = new Date();
+            var tempmonth = (dt.getMonth()+1);
+            var tempdate = dt.getDate();
+            var temphour = dt.getHours();
+            var tempmin = dt.getMinutes();
+            var tempsec = dt.getSeconds();
+            if (tempmonth < 10) {
+              tempmonth = "0" + tempmonth;
             }
-          });
-      });
-  });
+            
+            if (tempdate < 10) {
+              tempdate = "0" + tempdate;
+            }
+            
+            if (temphour < 10) {
+              temphour = "0" + temphour;
+            }
+            
+            if (tempmin < 10) {
+              tempmin = "0" + tempmin;
+            }
+            
+            if (tempsec < 10) {
+              tempsec = "0" + tempsec;
+            }
+            
+            var time = dt.getFullYear() + "-" + tempmonth + "-" + tempdate + "-" + temphour + "-" + tempmin + "-" + tempsec;
+            $( ".replies_content" ).append( "<h5 style=\"margin-left: 20px;\">" + reply_txt + "<span> - " + time + "</span>" + "</h5>" + "<hr>" );
+            $( "#replyCount" ).text(replycount + 1);
+            $( "#replyContent" ).val('');
+          }
+        });
+    });
+});
 </script>

@@ -7,21 +7,19 @@
     <hr>
   </div>
   <% @allpost.order('created_at DESC').each do |x| %>
-  <a href="/csecretary/read/<%= x.id %>" style="text-decoration: none; color: black">
-  <div>
+    <a href="/csecretary/read/<%= x.id %>" style="text-decoration: none; color: black">
+      <div>
   		  <div style="margin-left: 6px; margin-top: 5px">
-  		  <p style="font-size: 18px"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>  <%= x.post_title %> <span style="font-size: 10px">[<%= x.replies.size %>]</span></p>
-  		  <p style="font-size: 10px"><%= x.post_name %> | <%= x.created_at.strftime("%Y-%m-%d-%H-%M-%S") %></p>
-  		</div>
-  		  <hr style="margin-top: 0px; margin-bottom: 0px">
-  		  <% end %>
-  </div>
-  </a>
-  
+    		  <p style="font-size: 18px"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>  <%= x.post_title %> <span style="font-size: 10px">[<%= x.replies.size %>]</span></p>
+    		  <p style="font-size: 10px"><%= x.post_name %> | <%= x.created_at.strftime("%Y-%m-%d-%H-%M-%S") %></p>
+  		  </div>
+  	    <hr style="margin-top: 0px; margin-bottom: 0px">
+      </div>
+    </a>
+  <% end %>
   <div style="text-align: center;">
     <%= paginate @allpost %>
   </div>
-
 
 <style>
   .ui-page-theme-a a:visited, html .ui-bar-a a:visited, html .ui-body-a a:visited, html body .ui-group-theme-a a:visited {
