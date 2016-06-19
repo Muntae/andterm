@@ -407,7 +407,7 @@ class CsecretaryController < ApplicationController
   
   def list
     
-    @allpost = Post.all
+    @allpost = Post.page(params[:page]).per(8)
     
   end
   

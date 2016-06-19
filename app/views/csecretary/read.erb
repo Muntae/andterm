@@ -1,9 +1,11 @@
-<div class="container">
-  <div data-role="header" style="margin-bottom: 15px; padding: 5px;">
-    <a href="/csecretary/relay" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">홈</a>
-    <h1>자유게시판</h1>
+  <div data-role="header">
+    
+      <a href="/csecretary/relay" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left" style="margin: 3px;">홈</a>
+    
+    <p style="font-size: 20px; text-align: center; margin-top: 10px"><strong>커뮤니티 게시판</strong><p>
   </div>
-  <div>
+  
+  <div style="margin-left: 6px; margin-right: 6px; margin-top:5px">
     <div class="panel panel-default">
       <div class="panel-body">
         제목 : <%= @one_post.post_title %><div style="float: right">글쓴이 : <%= @one_post.post_name %></div>
@@ -12,16 +14,18 @@
       </div>
     </div>
     <div style="float: right">
-      <a class="btn btn-default" href="/csecretary/delete/<%= @one_post.id %>" role="button">삭제</a>
-      <a class="btn btn-default" href="/csecretary/modify/<%= @one_post.id %>" role="button">수정</a>
+      <a class="btn btn-default" href="/csecretary/delete/<%= @one_post.id %>" role="button" style="color: black">삭제</a>
+      <a class="btn btn-default" href="/csecretary/modify/<%= @one_post.id %>" role="button" style="color: black">수정</a>
     </div><br>
     <hr>
     <div class="well">
-
       댓글달기
           <input type="hidden" name="post_id" value="<%= @one_post.id %>">
           <textarea name="reply_content" id="replyContent"></textarea>
-          <input type="submit" value="등록" id="replySubmit" class="ui-btn ui-corner-all ui-shadow ui-icon-home" style="float: right">
+          <div class="col-xs-8"></div>
+          <div class="col-xs-4">
+            <input type="submit" value="등록" id="replySubmit" class="btn btn-default" style="float: right">
+          </div>
           <br>
           <br>
       
@@ -41,7 +45,6 @@
         <a href="/csecretary/relay" class="ui-btn ui-corner-all ui-shadow ui-icon-home">뒤로가기</a>
     </div>
   </div>
-</div>
 
 <script>
   $(function(){

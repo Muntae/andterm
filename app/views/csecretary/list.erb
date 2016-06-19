@@ -1,19 +1,39 @@
-<div class="container">
-  <div data-role="header" style="margin-bottom: 15px; padding: 5px;">
-    <h1>자유게시판</h1>
+  <div data-role="header">
+    <p style="font-size: 20px; text-align: center; margin-top: 10px"><strong>커뮤니티 게시판</strong><p>
+    <a href="/csecretary/create" class="ui-btn ui-corner-all ui-btn-right ui-icon-edit ui-btn-icon-left" style="margin: 3px;">글쓰기</a>
   </div>
-  <div data-role="main" class="ui-content">
-    <ul data-role="listview" data-inset="true">
-        <% @allpost.each do |x| %>
-  		<li><a href="/csecretary/read/<%= x.id %>"><%= x.post_title %></a></li>
-  		  <% end %>
-  	</ul>
+  <div style="margin-left: 6px; margin-top: 5px">
+    <h3><span class="glyphicon glyphicon-bullhorn" aria-hidden="true" style="margin-right: 10px"></span>공지사항입니다.</h3>
+    <hr>
   </div>
+  <% @allpost.order('created_at DESC').each do |x| %>
+  <a href="/csecretary/read/<%= x.id %>" style="text-decoration: none; color: black">
   <div>
-    <a href="/csecretary/create" class="ui-btn ui-corner-all ui-shadow ui-icon-home">글쓰기</a>
+  		  <div style="margin-left: 6px; margin-top: 5px">
+  		  <p style="font-size: 18px"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>  <%= x.post_title %> <span style="font-size: 10px">[<%= x.replies.size %>]</span></p>
+  		  <p style="font-size: 10px"><%= x.post_name %> | <%= x.created_at.strftime("%Y-%m-%d-%H-%M-%S") %></p>
+  		</div>
+  		  <hr style="margin-top: 0px; margin-bottom: 0px">
+  		  <% end %>
   </div>
-</div>
+  </a>
+  
+  <div style="text-align: center;">
+    <%= paginate @allpost %>
+  </div>
 
 
+<style>
+  .ui-page-theme-a a:visited, html .ui-bar-a a:visited, html .ui-body-a a:visited, html body .ui-group-theme-a a:visited {
+    color: black;
+  }
+  
+  div nav span a {
+    font-size: 15px;
+  }
+  div nav span {
+    font-size: 15px;
+  }
+</style>
 
 
