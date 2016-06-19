@@ -37,7 +37,7 @@
     </div>
     <div class="replies_content">
       <% @one_post.replies.each do |r| %>
-      <h5 style="margin-left: 20px;"><%= r.reply_content %></h5>
+      <h5 style="margin-left: 20px;"><%= r.reply_content %><span> - <%= r.created_at.strftime("%Y-%m-%d-%H-%M-%S") %></span></h5>
       <hr>
       <% end %>
     </div>
@@ -57,7 +57,34 @@
             success: function(){
               var reply_txt = $("#replyContent").val();
               var replycount = parseInt($( "#replyCount" ).text());
-              $( ".replies_content" ).append( "<h5 style=\"margin-left: 20px;\">" + reply_txt + "</h5>" + "<hr>" );
+              var dt = new Date();
+              var tempmonth = (dt.getMonth()+1);
+              var tempdate = dt.getDate();
+              var temphour = dt.getHours();
+              var tempmin = dt.getMinutes();
+              var tempsec = dt.getSeconds();
+              if (tempmonth < 10) {
+                tempmonth = "0" + tempmonth;
+              }
+              
+              if (tempdate < 10) {
+                tempdate = "0" + tempdate;
+              }
+              
+              if (temphour < 10) {
+                temphour = "0" + temphour;
+              }
+              
+              if (tempmin < 10) {
+                tempmin = "0" + tempmin;
+              }
+              
+              if (tempsec < 10) {
+                tempsec = "0" + tempsec;
+              }
+              
+              var time = dt.getFullYear() + "-" + tempmonth + "-" + tempdate + "-" + temphour + "-" + tempmin + "-" + tempsec;
+              $( ".replies_content" ).append( "<h5 style=\"margin-left: 20px;\">" + reply_txt + "<span> - " + time + "</span>" + "</h5>" + "<hr>" );
               $( "#replyCount" ).text(replycount + 1);
               $( "#replyContent" ).val('');
             }
